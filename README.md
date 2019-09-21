@@ -18,8 +18,8 @@ git clone https://github.com/mirusu400/Harvest_Moon_Inspection_Homepage
 ## 기본적으로 바꿔야 하는 것
  1. `HMsite\manage.py` 를 다음과 같이 수정해야합니다.
  ```
- os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMsite.settings')
-->	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMsite.settings_public')
+ -- os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMsite.settings')
+ ++	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMsite.settings_public')
  ```
  
  2. `secrets.json` 안에 `SECRET_KEY` 를 설정해줘야 합니다.
