@@ -1,0 +1,346 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>Translate Form</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'HM_GB/style.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="{% static 'HM_GB/mainjava.js' %}"></script>
+	<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+	<link href="{% static 'HM_GB/jquery.toast.css' %}" rel="stylesheet">
+    <script src="{% static 'HM_GB/jquery.toast.js' %}"></script>
+	<script>
+	function changeImage() {
+		var radioValue = $("input[name='Ex_Images']:checked").val();
+		switch (radioValue){
+		case "1" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Agi.png' %}");
+			break;
+		case "2" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Anemone.png' %}");
+			break;
+		case "3" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Clare.png' %}");
+			break;
+		case "4" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Diruka.png' %}");
+			break;
+		case "5" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Enjuu.png' %}");
+			break;
+		case "6" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Erihee.png' %}");
+			break;
+		case "7" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Felix.png' %}");
+			break;
+		case "8" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Issac.png' %}");
+			break;
+		case "9" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Item.png' %}");
+			break;
+		case "10" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Kevin.png' %}");
+			break;
+		case "11" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Loid.png' %}");
+			break;
+		case "12" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Merine.png' %}");
+			break;
+		case "13" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Mina.png' %}");
+			break;
+		case "14" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Mucho.png' %}");
+			break;
+		case "15" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Prayer.png' %}");
+			break;
+		case "16" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Sania.png' %}");
+			break;
+		case "17" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Stuot.png' %}");
+			break;
+		case "18" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Wilbur.png' %}");
+			break;
+		case "19" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Yuris.png' %}");
+			break;
+		case "20" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Exmaple_Cellpha.png' %}");
+			break;
+		case "21" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Exmaple_Nerine.png' %}");
+			break;
+		case "22" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Exmaple_Rarami.png' %}");
+			break;
+		case "23" :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Exmaple_Shigin.png' %}");
+			break;
+		default :
+			$("#Ex_Image").attr("src","{% static 'HM_GB/images/Example_Felix.png' %}");
+		}
+	}
+	</script>
+	<script>
+		var JPNArr = new Array();
+		var ENGArr = new Array();
+		var KOR1Arr = new Array();
+		var KOR2Arr	 = new Array();
+		var IsTransArr = new Array();
+		var IsInspeArr = new Array();
+		var TransDateArr = new Array();
+		var SubFileArr = new Array();
+		var SubFileLineArr = new Array();
+		var KORLogArr = new Array();
+		var EditorArr = new Array();
+		var PKarr = new Array();
+		var PreviewArray = new Array();
+		var NumIndex = 0;
+		var linePK = 0;
+		var Maxline = 0;
+		var PreviewIndex = 0;
+		var ViewPrev = false;
+		{% if user.is_authenticated %}
+			var username = "{{user.first_name}}";
+			var verify = 1;
+		{% else %}
+			var username = ip()
+			var verify = 0;
+		{% endif %}
+
+	</script>
+	<script>
+	var i=0
+	{% if Request_mes == "event_mes_data" %}
+		{% for aa in Translate_list %}
+			var subfile = "{{aa.SubFile_Name}}";
+			var temp = subfile.substring(0,5);
+			if (temp == "event")
+			{
+				SubFileArr[i] = '{{aa.SubFile_Name}}';
+				SubFileLineArr[i] = '{{aa.SubFile_Lineindex}}';
+				JPNArr[i]='{{aa.Translate_text_JPN}}';
+				ENGArr[i]='{{aa.Translate_text_ENG}}';
+				KOR1Arr[i]='{{aa.Translate_text_KOR1}}';
+				KOR2Arr[i]='{{aa.Translate_text_KOR2}}';
+				
+				IsTransArr[i]='{{aa.Translate_IsTranslated}}';
+				IsInspeArr[i]='{{aa.Translate_IsInspected}}';
+				TransDateArr[i]='{{aa.Translate_date}}';
+				KORLogArr[i] = '{{aa.Translate_text_KORLOG}}';
+				PKarr[i] = '{{aa.id}}';
+				if("{{aa.Translate_text_KORLOG}}" != "None")
+				{
+					var txt = "{{aa.Translate_LastEditor}}".split(".");
+					if(txt[3] === undefined)
+						txt2="{{aa.Translate_LastEditor}}"
+					else
+						var txt2 = txt[0]+"."+txt[1]+"."+"***"+"."+"***"
+				}
+				else
+				{
+					var txt2 = "None"
+				}
+				EditorArr[i] = txt2;
+				i++;
+			}
+		{% endfor %}
+	{% elif Request_mes == "mes_data" %}
+		{% for aa in Translate_list %}
+			var subfile = "{{aa.SubFile_Name}}";
+			var temp = subfile.substring(0,3);;
+			if (temp == "mes")
+			{
+				SubFileArr[i] = '{{aa.SubFile_Name}}';
+				SubFileLineArr[i] = '{{aa.SubFile_Lineindex}}';
+				JPNArr[i]='{{aa.Translate_text_JPN}}';
+				ENGArr[i]='{{aa.Translate_text_ENG}}';
+				KOR1Arr[i]='{{aa.Translate_text_KOR1}}';
+				KOR2Arr[i]='{{aa.Translate_text_KOR2}}';
+				
+				IsTransArr[i]='{{aa.Translate_IsTranslated}}';
+				IsInspeArr[i]='{{aa.Translate_IsInspected}}';
+				TransDateArr[i]='{{aa.Translate_date}}';
+				KORLogArr[i] = '{{aa.Translate_text_KORLOG}}';
+				PKarr[i] = '{{aa.id}}';
+				if("{{aa.Translate_text_KORLOG}}" != "None")
+				{
+					var txt = "{{aa.Translate_LastEditor}}".split(".");
+					if(txt[3] === undefined)
+						txt2="{{aa.Translate_LastEditor}}"
+					else
+						var txt2 = txt[0]+"."+txt[1]+"."+"***"+"."+"***"
+				}
+				else
+				{
+					var txt2 = "None"
+				}
+				EditorArr[i] = txt2;
+					i++;
+			}
+		{% endfor %}
+	{% endif %}
+	</script>
+</head>
+
+<body>
+<div class="container" style="overflow-x:auto;" width="100%">
+	<table width="100%">
+		<tr>
+		<td rowspan="2" width="10%"> 
+			<!-- 서브파일 인덱스하는 컨테이너 -->
+			<div style="width:150px; overflow:hidden">
+				<select onchange = "SelectSubIndex();" name="Subindex" id="Subindex" class="Subindex"> </select>
+				<script> FileGet(); </script>
+				<!-- 서브텍스트 인덱스하는 컨테이너 -->
+				<select width="150px" size=10 class = "Textindex" name = "TextIndexID" id = "TextIndexID" multiple="multiple" onchange="SelectLine()"> </select>
+			</div>
+		</td>
+		<td colspan="3" width="90%">
+			<table class="ViewTable" width="100%">
+				<thead>
+				   <tr>
+						<td width="33%" ><B>JPN</B></td>
+						<td width="33%" ><B>ENG</B></td>
+						<td width="33%" ><B>KOR1</B></td>						
+				   </tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><textarea readonly="readonly" id = "TxtJpn" cols="85%" class=preview type="text" name="JPN">TxtJPN</textarea></td>
+						<td><textarea readonly="readonly" id = "TxtEng" cols="85%" class=preview type="text" name="ENG">TxtEng</textarea></td>
+						<td><textarea readonly="readonly" id = "TxtKOR1" cols="85%" class=preview type="text" name="KOR1">TxtKOR1</textarea></td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+		</tr>
+	<tr>
+		<td>
+
+			<input type="checkbox" name = "isTranslated" id = "isTranslated" onclick = "onclickTrans(this)">번역완료<br>
+			<input type="checkbox" name = "inInspected" id = "isInspected" onclick = "onclickInspec(this)">검수확인<br>
+
+			최종 업데이트 시간 <br>
+			<input size="16" readonly="readonly" type="text" id="Transtime"> <br>
+			최종 수정자 <br>
+			<input size="16" readonly="readonly" type="text" name = "ShowEditorName" id="ShowEditorName"> <br>
+		</td>
+		<td>
+			Input Translated Text<br>
+
+			<textarea rows = "5%" cols="75%" name = "TxtKOR2" id = "TxtKOR2" onfocusout="changeExPreview()" class=inputbox type="text">TxtKOR2</textarea>
+
+		</td>
+		<td>
+
+			<input type="button" onclick="GetKORorigin(); changeExPreview();" name="GetKOROrigin" value="한글 원본 가져오기" class="btn btn-success"> <br>
+			<input type="button" onclick="GetJPNorigin(); changeExPreview();" name="GetJPNOrigin" value="일어 원본 가져오기" class="btn btn-success"> <br>
+			<input size="16" type="text" name="nowtime" id="nowtime"> <br>
+			<input type="button" onclick="Submitform(1)" name="Submitbtn" value="Submit" class="submit btn btn-success"> <br>
+			{% if user.is_authenticated %}<!-- 만약 로그인이 되어있는 상태이면 -->
+				<input type="button" onclick="Submitform(2)" name="Submitbtn" value="Submit(검수)" class="submit btn btn-success">
+			{% endif %}
+
+		</td>
+	</tr>
+	</table>
+	<script>
+		document.getElementById("TextIndexID").selectedIndex = 0;
+		SelectLine(0);
+
+	</script>
+
+
+
+</div>
+<input class="btn btn-primary go_left" onclick="goprev();" type="button" value="←">
+<input class="btn btn-primary go_right" onclick="gonext();" type="button" value="→">
+
+<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)">
+Data Log
+</a><div style="DISPLAY: none">
+<textarea id = "KORLog" width = 100% height = 100% type="text" name="KORLog">KORlog</textarea>
+</div>
+<br>
+<!--a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none'; chkViewPrev();" href="javascript:void(0)">
+실제 화면 출력 보기
+
+</a-->
+<button class="btn btn-info" onclick="chkViewPrev();" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+실제 출력될 화면 보기
+</button>
+<div class="collapse card card-body" id="collapseExample">
+	<div class="example-block" style="width:256px; height:256px;float:left;">
+		<img src="{% static 'HM_GB/images/Example_Felix.png' %}" id = "Ex_Image" alt="Eximg"> 
+		<div id = "previewTxt" class="text-block">
+			테스트테스트테스트<br>테스트테스트테스트
+		</div>
+	</div>
+		<input class="btn btn-secondary" onclick="goExPrev();" type="button" value="←">
+		<input class="btn btn-secondary" onclick="goExNext();" type="button" value="→">
+		<br>
+	<div style="width:256px; float:left; border:1px solid gold;">
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="1">아지
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="2">아네모네
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="3">클레어
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="4">디루카
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="5">엔쥬
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="6">에리히
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="7" checked="checked">펠릭스
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="8">아이작
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="9">아이템
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="10">케빈
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="11">로이드
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="12">메리네
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="13">미나
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="14">무쵸
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="15">프레이어
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="16">세니아
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="17">스튜어트
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="18">윌버
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="19">유리스
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="20">셸파
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="21">네리네
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="22">라라미
+		<input type="radio" name="Ex_Images" onclick="changeImage();" value="23">시긴
+	</div>
+	<div style="width:512px; float:left; border:1px solid gold;">
+		주인공 이름
+		<input type="text" maxlength="6" onfocusout="changeExPreview()" value="ＮＡＭＥ" name="PrevName" id="PrevName"> <br>
+		주인공 이름(결혼후 닉네임)
+		<input type="text" maxlength="6" onfocusout="changeExPreview()" value="ＭＩＲＵ" name="PrevNameAfter" id="PrevNameAfter"> <br>
+		자녀 이름
+		<input type="text" maxlength="6" onfocusout="changeExPreview()" value="ＩＬＯＶＥＵ" name="PrevNameBirth" id="PrevNameBirth"> <br>
+		기타 인수
+		<input type="text" maxlength="6" onfocusout="changeExPreview()" value="ＯＴＨＥＲ" name="PrevNameOther" id="PrevNameOther"> <br>
+		<br>
+		화면 출력 폰트는 예시일 뿐이며 실제로는 다른 폰트가 적용됩니다.
+		<br>
+		또한 이름은 최대 6글자까지 가능합니다.
+		<br>
+		mes_data 등에서는 정상적으로 작동하지 않을 수 있습니다.
+		<br>
+		빠진 캐릭터가 있다면 작업중인 파일명/라인을 메일로 보내주시면 추가하겠습니다.
+	</div>
+</div>
+
+
+
+
+<!-- For BootStrap -->
+
+
+
+</body>

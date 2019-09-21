@@ -1,0 +1,96 @@
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+@font-face {
+	font-family: "Dotum"
+	src:url("dotum.ttc") format("truetype");
+	font-style:normal;
+	font-weight:normal;
+}
+select[multiple]{
+   height: 100%;
+}
+body {
+		width: 100%;
+}
+
+table {
+		text-align: center;
+		border: 1px solid #444444;	
+}
+textarea {
+	
+}
+th, td {
+  border: 1px solid #444444;
+}
+.example-block {
+  position: relative;
+}
+.text-block {
+  position: relative;
+  width: 185px;
+  font-family: "Dotum";
+  text-align: left;
+  line-height: 16px;
+  font-size: 13px;
+  bottom: 56px;
+  left: 18px; 
+  color: #906848;
+  text-shadow:0 1px #C8A078,1px 0 #C8A078;
+}
+.bluePrvTxt {
+	color: #204080;
+	text-shadow:0 1px #5868A0,1px 0 #5868A0;
+}
+.redPrvTxt {
+	color: #B01000;
+	text-shadow:0 1px #C85828,1px 0 #C85828;
+}
+.greenPrvTxt {
+	color: #105810;
+	text-shadow:0 1px #408840,1px 0 #408840;
+}
+.ViewTable {
+	vertical-align: top;
+	overflow: scroll;
+	width: 100%;
+	height: 40%;
+}
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.Textindex {
+	width: 90%;
+	height: 80%;
+	overflow: auto;
+}
+.preview {
+	width: 100%;
+	min-height: 20px;
+	
+}
+.hiddenform {
+	display:none
+}
+
+.go_left {
+	width: 45%;
+	height: 20%;
+	
+	position: relative;
+	
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.go_right {
+	width: 45%;
+	height: 20%;
+	
+	position: relative;
+	
+	margin-top: 10px;
+	margin-right: 10px;
+	float:right;
+}
