@@ -8,6 +8,7 @@ from django.views import generic
 from django.urls import reverse
 from django.template import loader
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.hashers import check_password
 from django.db import connection
@@ -54,8 +55,12 @@ def DetailView(request,mesname):
         return render(request,template_name)
     return render(request,template_name,context)
 
+def changedNoun(request):
+    return render(request, 'HM_GB/changedNoun.html')
 
 def signup(request):
+    return HttpResponseNotFound('<h1>Page not found</h1>')
+    """
     if request.method == "GET":
         return render(request, 'HM_GB/signup.html', {'f': SignupForm()})
     elif request.method == "POST":
@@ -73,13 +78,13 @@ def signup(request):
                 # 나머지 입력하지 못한 last_name과, first_name은 따로 지정해준다.
                 new_user.save()
 
-                return HttpResponseRedirect(reverse('vote:index'))
+                return render(request, 'HM_GB/index.html')
             else:
                 return render(request, 'HM_GB/signup.html', {'f': form,
                                                                    'error': '비밀번호와 비밀번호 확인이 다릅니다.'})  # password와 password_check가 다를 것을 대비하여 error를 지정해준다.
         else:  # form.is_valid()가 아닐 경우, 즉 유효한 값이 들어오지 않았을 경우는
             return render(request, 'HM_GB/signup.html', {'f': form})
-
+    """
 
 # 원래는 error 메시지를 지정해줘야 하지만 따로 지정해주지 않는다.
 def signin(request):  # 로그인 기능

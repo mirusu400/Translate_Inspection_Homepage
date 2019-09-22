@@ -36,8 +36,9 @@
 <!-- 변동부분을 block 지정해준다. -->
 {% endblock %}    
     <ul>
-        <li><a href="{% url 'HM_GB:detail_mes_data' 'event_mes_data'%}">event_mes_data</a></li>
+       <li><a href="{% url 'HM_GB:detail_mes_data' 'event_mes_data'%}">event_mes_data</a></li>
 		<li><a href="{% url 'HM_GB:detail_mes_data' 'mes_data'%}">mes_data</a></li>
+		<li><a href="{% url 'HM_GB:changedNoun'%}" target="_blank">바뀐 고유명사 목록</a></li>
     </ul>
 	<h2>목장이야기 바람의바자회 번역 및 검수 홈페이지입니다.</h2>
 	본 사이트는 크롬에서 가장 잘 작동됩니다.<br> <br>
@@ -65,6 +66,9 @@
 	
 	<br> <br> <br>
 	<h2>Changelog</h2>
+	<h4> 2019.09.22 </h4>
+	<li> Submit 버튼을 누를때 정상적인 텍스트인지 검사하도록 설정하였습니다. </li>
+	<li> 번역완료/검수완료를 더 직관적으로 보도록 배경색을 지정했습니다. </li>
 	<h4> 2019.09.21 </h4>
 	<li> Submit 속도를 대폭 향상시켰습니다. </li>
 	<li> 작성한 번역본을 Preview하는 기능을 만들었습니다. </li>

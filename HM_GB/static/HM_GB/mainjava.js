@@ -48,7 +48,33 @@ goExPrev, goExnext	각 미리보기를 앞/뒤로 이동하는 함수
 
 
 //--------------------------------
-
+function ChkVaild() {
+	var chkTxt = KR2Elem.value;
+	var TxtArray = new Array();
+	var chkLeftBar = chkTxt.match((/\[/g) || []).length;
+	var chkRightBar = chkTxt.match((/\]/g) || []).length;
+	if(chkLeftBar != chkRightBar) // Invaild
+	{
+		SendFailToast("Error!","제어코드 입력이 잘못되었습니다. 대괄호가 제대로 닫혔는지 확인해주세요.")
+		return 0
+	}
+	if(chkTxt.includes("스테키"))
+	{
+		SendWarnToast("Warn!","바뀐 고유명사 '스테키'가 포함되어있습니다.")
+		return 0
+	}
+	TxtArray = chkTxt.split("");
+	for (var i=0; i<TxtArray.length; i++)
+	{
+		if(TxtArray[i] == "[" && TxtArray[i+5] != "]")
+		{
+			SendFailToast("Error!","제어코드 입력이 잘못되었습니다. 대괄호 안을 정확히 작성했는지 확인해주세요.")
+			return 0
+		}
+	}
+	
+	return 1
+}
 function PutArray(chknum) {
 	var edit = document.getElementById("EditorName");
 	KOR2Arr[NumIndex] = KR2Elem.value;
@@ -64,7 +90,10 @@ function PutArray(chknum) {
 	KORLogArr[NumIndex] = "---------------------" + NowTimeElem.value + "<" + KR2Elem.value +  "---------------------" + KORLogArr[NumIndex]
 }
 function Submitform(chknum) {
-	if(((IsInspeArr[NumIndex] == "False") || (IsInspeArr[NumIndex] == false)) && (KR2Elem.value != "") && (KR2Elem.value != "None"))
+	var CheckForm = ChkVaild()
+	if(CheckForm == 0)
+		return
+	if((verify == 1) || (((IsInspeArr[NumIndex] == "False") || (IsInspeArr[NumIndex] == false)) && (KR2Elem.value != "") && (KR2Elem.value != "None")))
 	{
 		PutArray(chknum)
 		if($('#nowtime').val() !== "")
@@ -144,6 +173,13 @@ function SelectSubIndex() {
 	var objOption = document.createElement("option");
 	objOption.text = checkstatue(linePK);
 	objOption.value = linePK;
+	if(IsTransArr[linePK] == "True" || IsTransArr[linePK] == "true")
+	{
+		if(IsInspeArr[linePK] == "True" || IsInspeArr[linePK] == "true")
+			objOption.style.backgroundColor = "#d0d8ff";
+		else
+			objOption.style.backgroundColor = "#d0ffdc";
+	}
 	Indexval.add(objOption);
 	linePK++;
 	Maxline++;
@@ -152,6 +188,13 @@ function SelectSubIndex() {
 		var objOption = document.createElement("option");       
 		objOption.text = checkstatue(linePK);
 		objOption.value = linePK;
+		if(IsTransArr[linePK] == "True" || IsTransArr[linePK] == "true")
+		{
+			if(IsInspeArr[linePK] == "True" || IsInspeArr[linePK] == "true")
+				objOption.style.backgroundColor = "#d0d8ff";
+			else
+				objOption.style.backgroundColor = "#d0ffdc";
+		}
 		Indexval.add(objOption);
 		if(linePK == SubFileLineArr.length)
 		{
