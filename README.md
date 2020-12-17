@@ -1,4 +1,4 @@
-# Now On Here http://15.164.82.83/HM_GB/
+# Now On Here http://mirunamu.studio/HM_GB/
 
 # 목장이야기 시리즈 번역 및 검수 홈페이지 템플릿
 
