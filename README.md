@@ -1,8 +1,8 @@
 # Now On Here http://mirunamu.studio/HM_GB/
 
-# 목장이야기 시리즈 번역 및 검수 홈페이지 템플릿
+# 오픈소스 번역 및 검수 홈페이지 템플릿
 
-Django 와 Sqlite를 이용한, 목장이야기 바람의바자회 및 쌍둥이마을을 포함한 여러가지 게임들을 검수하기 위해 만들어진 템플릿입니다.
+Django 와 Sqlite를 이용한, 여러가지 게임들을 검수 및 번역하기 위해 만들어진 템플릿입니다.
 
 ## Requirements
 ```
