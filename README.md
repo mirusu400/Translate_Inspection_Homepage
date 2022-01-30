@@ -1,4 +1,4 @@
-# Now On Here http://mirunamu.studio/HM_GB/
+# Now On Here http://mirunamu.tech/HM_GB/
 
 # 오픈소스 번역 및 검수 홈페이지 템플릿
 
